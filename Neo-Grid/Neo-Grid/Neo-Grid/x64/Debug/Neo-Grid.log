@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
+  (compiling source file 'main.cpp')
+      C:\Users\User\Documents\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\include\glad\glad.h(32,9):
+      see previous definition of 'APIENTRY'
+  
+  Neo-Grid.vcxproj -> C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\x64\Debug\Neo-Grid.exe
