@@ -10,8 +10,14 @@
 #include <windows.h>
 #include <commdlg.h>
 
+
+#include "triangle.h"
+#include "triangle_factory.cpp"
+
+int Triangle::globalID = 0;
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow* window);
+void processInput(GLFWwindow* window, TriangleFactory& triangleFactory);
 std::string getFilePath();
 
 const unsigned int SCR_WIDTH = 800;
@@ -23,9 +29,11 @@ float imageAspect;
 bool isLoadImageButtonPressed = false;
 unsigned int m_texture;
 
-void loadImage(Shader cShader, GLFWwindow* window);
-void update_mvp(int width, int height);
 
+void loadImage(Shader cShader, GLFWwindow* window, TriangleFactory& triangleFactory);
+void update_mvp(int width, int height);
+void GetImgPixel(stbi_uc* image, size_t width, size_t x, size_t y, stbi_uc* r, stbi_uc* g, stbi_uc* b, stbi_uc* a);
+void get_new_vertex_positions(float* out);
 float vertices[] = {
     // positions          // colors           // texture coords
      1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
@@ -40,6 +48,7 @@ unsigned int indices[] = {
 
 int main()
 {
+
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -60,8 +69,10 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+    TriangleFactory triangleFactory;
 
     Shader cShader("shader.vs", "shader.fs");
+    Shader basicShader("basic_shader.vs", "basic_shader.fs");
 
     unsigned int VBO, VAO, EBO;
     glGenVertexArrays(1, &VAO);
@@ -91,10 +102,10 @@ int main()
     while (!glfwWindowShouldClose(window))
     {
         if (isLoadImageButtonPressed) {
-            loadImage(cShader, window);
+            loadImage(cShader, window, triangleFactory);
             isLoadImageButtonPressed = false;
         }
-        processInput(window);
+        processInput(window, triangleFactory);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -106,8 +117,8 @@ int main()
         glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, glm::value_ptr(g_mvp));
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        
-        
+        triangleFactory.draw(basicShader);
+
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -118,7 +129,8 @@ int main()
     glfwTerminate();
     return 0;
 }
-void loadImage(Shader cShader, GLFWwindow* window) {
+void loadImage(Shader cShader, GLFWwindow* window, TriangleFactory& triangleFactory) {
+    triangleFactory.clearTriangles();
     if (m_texture != 0) {
         glDeleteTextures(1, &m_texture);
     }
@@ -138,19 +150,27 @@ void loadImage(Shader cShader, GLFWwindow* window) {
     if (filename == "") {
         return;
     }
-    unsigned char* image = stbi_load(filename.c_str(), &width, &height, &comp, 0);
+    unsigned char* image = stbi_load(filename.c_str(), &width, &height, &comp, STBI_rgb_alpha);
+    stbi_uc r, g, b, a;
+    for (size_t i = 0; i < height; i++)
+    {
+        for (size_t j = 0; j < width; j++)
+        {
+            GetImgPixel(image, width, i, j, &r, &g, &b, &a);
+            //std::cout << i << " " << j << std::endl;
+            //std::cout << (int)r << (int)g << (int)b << std::endl;
+        }
+    }
+    
 
     if (image == nullptr)
         //if (stbi_failure_reason())
             //std::cout << stbi_failure_reason() << std::endl;
         std::cout << "Cannot load texture" << std::endl;
     else {
-
+        
         imageAspect = (float)width / height;
-        if (comp == 3)
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-        else if (comp == 4)
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 
         glGenerateMipmap(GL_TEXTURE_2D);
     }
@@ -163,7 +183,13 @@ void loadImage(Shader cShader, GLFWwindow* window) {
     glfwGetWindowSize(window, &curwidth, &curheight);
     update_mvp(curwidth, curheight);
 }
-
+void GetImgPixel(stbi_uc* image, size_t width, size_t x, size_t y, stbi_uc* r, stbi_uc* g, stbi_uc* b, stbi_uc* a) {
+    const int p = (4 * (x * width + y));
+    *r = image[p + 0];
+    *g = image[p + 1];
+    *b = image[p + 2];
+    *a = image[p + 3];
+}
 std::string getFilePath() {
     char filename[MAX_PATH] = "";
 
@@ -186,12 +212,33 @@ std::string getFilePath() {
     return "";
 }
 
-void processInput(GLFWwindow* window)
+void processInput(GLFWwindow* window, TriangleFactory& triangleFactory)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
         isLoadImageButtonPressed = true;
+    }
+    if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS) {
+        float nv[12];
+        get_new_vertex_positions(nv);
+        float new_new_vert[] = {
+            nv[0], nv[1], nv[2],
+            //nv[3], nv[4], nv[5],
+            nv[6], nv[7], nv[8],
+            nv[9], nv[10], nv[11]
+        };
+
+        float r = 0.23f;
+        float g = 0.23f;
+        float b = 0.23f;
+        float colors[] = {
+            r, g, b,
+            r, g, b,
+            r, g, b
+        };
+        Triangle t1(new_new_vert, colors);
+        triangleFactory.addTriangle(t1);
     }
 }
 
@@ -214,6 +261,24 @@ void update_mvp(int width, int height)
     else {
         model = glm::scale(model, glm::vec3(imageAspect, 1.0f, 1.0f));
     }
-
+    
     g_mvp = projection * view * model;
+}
+
+void get_new_vertex_positions(float* out) {
+    glm::vec4 original_vertices[4] = {
+    {  1.0f,  1.0f, 0.0f, 1.0f },
+    {  1.0f, -1.0f, 0.0f, 1.0f },
+    { -1.0f, -1.0f, 0.0f, 1.0f },
+    { -1.0f,  1.0f, 0.0f, 1.0f } 
+    };
+
+    int k = 0;
+    for (int i = 0; i < 4; ++i) {
+        glm::vec4 transformed = g_mvp * original_vertices[i];
+        for (size_t j = 0; j < 3; j++)
+        {
+            out[k++] = transformed[j];
+        }
+    }
 }

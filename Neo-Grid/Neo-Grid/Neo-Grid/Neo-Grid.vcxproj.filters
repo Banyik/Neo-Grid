@@ -27,6 +27,12 @@
     <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="triangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\x64\Debug\ekcu-logo.jpg">
@@ -37,12 +43,24 @@
     <ClInclude Include="shader_s.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.vs">
       <Filter>Shader</Filter>
     </None>
     <None Include="shader.fs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="basic_shader.fs">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="basic_shader.vs">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

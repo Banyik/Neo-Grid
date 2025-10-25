@@ -137,14 +137,20 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="triangle.cpp" />
+    <ClCompile Include="triangle_factory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\x64\Debug\ekcu-logo.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader_s.h" />
+    <ClInclude Include="triangle.h" />
+    <ClInclude Include="triangle_factory.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="basic_shader.fs" />
+    <None Include="basic_shader.vs" />
     <None Include="shader.fs" />
     <None Include="shader.vs" />
   </ItemGroup>
