@@ -33,6 +33,9 @@
     <ClCompile Include="triangle_factory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hexagon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\x64\Debug\ekcu-logo.jpg">
@@ -47,6 +50,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="triangle_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hexagon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
+    <ClCompile Include="hexagon.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="triangle.cpp" />
     <ClCompile Include="triangle_factory.cpp" />
@@ -144,6 +145,7 @@
     <Image Include="..\x64\Debug\ekcu-logo.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="hexagon.h" />
     <ClInclude Include="shader_s.h" />
     <ClInclude Include="triangle.h" />
     <ClInclude Include="triangle_factory.h" />
