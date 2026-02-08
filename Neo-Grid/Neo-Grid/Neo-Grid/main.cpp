@@ -16,6 +16,9 @@
 
 #include "triangle.h"
 #include "triangle_factory.cpp"
+#include <algorithm>
+#include <array>
+#include <fstream>
 
 int Triangle::globalID = 0;
 
@@ -25,11 +28,17 @@ std::string getFilePath();
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+
+int tex_height;
+int tex_width;
+unsigned char* tex_data = nullptr;
+
 glm::mat4 g_mvp;
 
 float imageAspect;
 
 bool isLoadImageButtonPressed = false;
+bool isLoadFileButtonPressed = false;
 unsigned int m_texture;
 
 
@@ -37,9 +46,9 @@ void loadImage(Shader cShader, GLFWwindow* window, TriangleFactory& triangleFact
 void update_mvp(int width, int height);
 void GetImgPixel(stbi_uc* image, size_t width, size_t x, size_t y, stbi_uc* r, stbi_uc* g, stbi_uc* b, stbi_uc* a);
 void get_new_vertex_positions(float* out);
-void new_grid_kernel(float x_max, float y_max, float size, float* hex_vertices, int* indices, std::vector<Hexagon>& hexagons, TriangleFactory& triangleFactory);
-void generate_new_grid_vertices(float xmax, float xmin, float ymax, float ymin, int size, float* hex_vertices, int* indices);
+void new_grid_kernel(float x_max, float y_max, float size, std::vector<float>& hex_vertices, std::vector<int>& indices, std::vector<Hexagon>& hexagons, TriangleFactory& triangleFactory);
 void create_new_grid(TriangleFactory& triangleFactory);
+void load_hex_file(TriangleFactory& triangleFactory);
 float vertices[] = {
     // positions          // colors           // texture coords
      1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
@@ -111,6 +120,10 @@ int main()
             loadImage(cShader, window, triangleFactory);
             isLoadImageButtonPressed = false;
         }
+        if (isLoadFileButtonPressed) {
+            load_hex_file(triangleFactory);
+            isLoadFileButtonPressed = false;
+        }
         processInput(window, triangleFactory);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -158,30 +171,34 @@ void loadImage(Shader cShader, GLFWwindow* window, TriangleFactory& triangleFact
     }
     unsigned char* image = stbi_load(filename.c_str(), &width, &height, &comp, STBI_rgb_alpha);
     stbi_uc r, g, b, a;
-    for (size_t i = 0; i < height; i++)
-    {
-        for (size_t j = 0; j < width; j++)
-        {
-            GetImgPixel(image, width, i, j, &r, &g, &b, &a);
-            //std::cout << i << " " << j << std::endl;
-            //std::cout << (int)r << (int)g << (int)b << std::endl;
-        }
-    }
+    //std::cout << (int)width << " " << (int)height << std::endl;
+    tex_height = height;
+    tex_width = width;
+    tex_data = image;
+    //for (size_t i = 0; i < height; i++)
+    //{
+    //    for (size_t j = 0; j < width; j++)
+    //    {
+    //        GetImgPixel(image, width, i, j, &r, &g, &b, &a);
+    //        //std::cout << i << " " << j << std::endl;
+    //        //std::cout << (int)r << (int)g << (int)b << std::endl;
+    //    }
+    //}
     
 
-    if (image == nullptr)
+    if (image == nullptr || tex_data == nullptr)
         //if (stbi_failure_reason())
             //std::cout << stbi_failure_reason() << std::endl;
         std::cout << "Cannot load texture" << std::endl;
     else {
         
         imageAspect = (float)width / height;
+        glGenerateMipmap(GL_TEXTURE_2D);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 
-        glGenerateMipmap(GL_TEXTURE_2D);
     }
 
-    stbi_image_free(image);
+    //stbi_image_free(image);
     cShader.use();
     cShader.setInt("m_texture", 0);
 
@@ -224,6 +241,9 @@ void processInput(GLFWwindow* window, TriangleFactory& triangleFactory)
         glfwSetWindowShouldClose(window, true);
     if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
         isLoadImageButtonPressed = true;
+    }
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+        isLoadFileButtonPressed = true;
     }
     if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS) {
         create_new_grid(triangleFactory);
@@ -271,7 +291,84 @@ void get_new_vertex_positions(float* out) {
     }
 }
 
-void new_grid_kernel(float x_max, float y_max, float size, float* hex_vertices, int* indices, std::vector<Hexagon>& hexagons, TriangleFactory& triangleFactory) {
+void get_colors(std::array<float, 18> h_vertices, float x_max, float y_max, float px_x_step, float px_y_step, float* colors) {
+    std::vector<int> x;
+    std::vector<int> y;
+    for (size_t v = 0; v < 18; v += 3)
+    {
+        x.push_back((int)((h_vertices[v] + x_max) / px_x_step));
+        y.push_back((int)((h_vertices[v + 1] + y_max) / px_y_step));
+    }
+    int maxx = *max_element(x.begin(), x.end());
+    int minx = *min_element(x.begin(), x.end());
+    int maxy = *max_element(y.begin(), y.end());
+    int miny = *min_element(y.begin(), y.end());
+
+    double r = 0;
+    double g = 0;
+    double b = 0;
+    int count = 0;
+    int n = x.size();
+    stbi_uc tr, tg, tb, ta;
+
+    for (size_t ty = miny; ty < maxy; ty++)
+    {
+        for (size_t tx = minx; tx < maxx; tx++)
+        {
+            bool inside = false;
+            for (int i = 0, j = n - 1; i < n; j = i++) {
+                if (((y[i] > ty) != (y[j] > ty)) &&
+                    (tx < (x[j] - x[i]) * (ty - y[i]) /
+                        (y[j] - y[i]) + x[i])) {
+                    inside = !inside;
+                }
+            }
+            if (inside) {
+                GetImgPixel(tex_data, tex_width, ty, tx, &tr, &tg, &tb, &ta);
+                r += tr;
+                g += tg;
+                b += tb;
+                count++;
+            }
+        }
+    }
+
+    r = (r / count)/255;
+    g = (g / count)/255;
+    b = (b / count)/255;
+    colors[0] = r;
+    colors[1] = g;
+    colors[2] = b;
+    colors[3] = r;
+    colors[4] = g;
+    colors[5] = b;
+    colors[6] = r;
+    colors[7] = g;
+    colors[8] = b;
+}
+
+void create_hex_triangle(std::array<int, 12> h_indices, std::array<float, 18> h_vertices, float* colors, TriangleFactory& triangleFactory) {
+    float t[9];
+    for (size_t j = 0; j < 4; j++)
+    {
+
+        for (size_t k = 0; k < 3; k++)
+        {
+            int vi = h_indices[j * 3 + k];
+            t[k * 3 + 0] = h_vertices[vi * 3 + 0];
+            t[k * 3 + 1] = h_vertices[vi * 3 + 1];
+            t[k * 3 + 2] = h_vertices[vi * 3 + 2];
+        }
+        Triangle t1(t, colors);
+        triangleFactory.addTriangle(t1);
+    }
+}
+
+void new_grid_kernel(float x_max, float y_max, float size, std::vector<float>& hex_vertices, std::vector<int>& indices, std::vector<Hexagon>& hexagons, TriangleFactory& triangleFactory) {
+
+    float px_x_step = (x_max * 2) / (tex_width - 1);
+    float px_y_step = (y_max * 2) / (tex_height - 1);
+
     const int VERTS_PER_CELL = 8;
     const int FLOATS_PER_VERT = 3;
     const int FLOATS_PER_CELL = VERTS_PER_CELL * FLOATS_PER_VERT;
@@ -304,13 +401,20 @@ void new_grid_kernel(float x_max, float y_max, float size, float* hex_vertices, 
 
     int cell = 0;
 
+    float cx;
+    float cy;
+    float colors[9];
+    std::array<float, FLOATS_PER_CELL> v;
+    std::array<float, FLOATS_PER_CELL> prev_v;
+    std::array<float, 18> h_v;
+    std::array<int, 12> h_i;
     for (int y = 0; y < size; y++) {
         for (int x = 0; x < size * 2; x++) {
 
-            float cx = -x_max + x * x_step;
-            float cy = y_max - y * y_step;
+            cx = -x_max + x * x_step;
+            cy = y_max - y * y_step;
 
-            float v[FLOATS_PER_CELL] = {
+            v = {
                 cx,             cy,               0.0f,
                 cx + x_step,    cy,               0.0f,
                 cx + x_step * 0.5f, cy - y_step * 0.25f, 0.0f,
@@ -320,55 +424,11 @@ void new_grid_kernel(float x_max, float y_max, float size, float* hex_vertices, 
                 cx,             cy - y_step,      0.0f,
                 cx + x_step,    cy - y_step,      0.0f
             };
-
-           /* int v_offset = cell * FLOATS_PER_CELL;
-            int i_offset = cell * INDICES_PER_CELL;
-            int base_vert = cell * VERTS_PER_CELL;
-
-            for (int i = 0; i < FLOATS_PER_CELL; i++)
-                hex_vertices[v_offset + i] = v[i];
-
-            for (int i = 0; i < INDICES_PER_CELL; i++)
-                indices[i_offset + i] = kernel_indices[i] + base_vert;
-                */
-            if (x > 0) {
-                float cx = -x_max + (x-1) * x_step;
-                float cy = y_max - y * y_step;
-
-                float prev_v[FLOATS_PER_CELL] = {
-                    cx,             cy,               0.0f,
-                    cx + x_step,    cy,               0.0f,
-                    cx + x_step * 0.5f, cy - y_step * 0.25f, 0.0f,
-                    cx + x_step * 0.5f, cy - y_step * 0.5f, 0.0f,
-                    cx,             cy - y_step * 0.75f, 0.0f,
-                    cx + x_step,    cy - y_step * 0.75f, 0.0f,
-                    cx,             cy - y_step,      0.0f,
-                    cx + x_step,    cy - y_step,      0.0f
-                };
-
-                float h_v[18] = {
-                    v[0], v[1], v[2],
-                    prev_v[6], prev_v[7], prev_v[8],
-                    prev_v[9], prev_v[10], prev_v[11],
-
-                    v[6],v[7],v[8],
-                    v[9],v[10],v[11],
-                    v[12], v[13], v[14]
-                };
-                int h_i[12] = {
-                    0, 1, 2,
-                    0, 2, 5,
-                    0, 3, 4,
-                    0, 4, 5
-                };
-                Hexagon h(h_v, h_i);
-                hexagons.push_back(h);
-            }
             if (y > 0) {
-                float cx = -x_max + x * x_step;
-                float cy = y_max - (y-1) * y_step;
+                cx = -x_max + x * x_step;
+                cy = y_max - (y - 1) * y_step;
 
-                float prev_v[FLOATS_PER_CELL] = {
+                prev_v = {
                     cx,             cy,               0.0f,
                     cx + x_step,    cy,               0.0f,
                     cx + x_step * 0.5f, cy - y_step * 0.25f, 0.0f,
@@ -379,7 +439,7 @@ void new_grid_kernel(float x_max, float y_max, float size, float* hex_vertices, 
                     cx + x_step,    cy - y_step,      0.0f
                 };
 
-                float h_v[18] = {
+                h_v = {
                     v[0], v[1], v[2],
                     v[3], v[4], v[5],
                     v[6], v[7], v[8],
@@ -388,257 +448,212 @@ void new_grid_kernel(float x_max, float y_max, float size, float* hex_vertices, 
                     prev_v[12], prev_v[13], prev_v[14],
                     prev_v[15], prev_v[16], prev_v[17],
                 };
-                int h_i[12] = {
+                h_i = {
                     0, 1, 2,
                     0, 3, 4,
                     1, 3, 5,
                     0, 1, 3
                 };
-                Hexagon h(h_v, h_i);
+                get_colors(h_v, x_max, y_max, px_x_step, px_y_step, colors);
+                Hexagon h(x, y * 2 - 1, colors);
                 hexagons.push_back(h);
+                create_hex_triangle(h_i, h_v, colors, triangleFactory);
             }
+            if (x > 0) {
+                cx = -x_max + (x-1) * x_step;
+                cy = y_max - y * y_step;
+
+                prev_v = {
+                    cx,             cy,               0.0f,
+                    cx + x_step,    cy,               0.0f,
+                    cx + x_step * 0.5f, cy - y_step * 0.25f, 0.0f,
+                    cx + x_step * 0.5f, cy - y_step * 0.5f, 0.0f,
+                    cx,             cy - y_step * 0.75f, 0.0f,
+                    cx + x_step,    cy - y_step * 0.75f, 0.0f,
+                    cx,             cy - y_step,      0.0f,
+                    cx + x_step,    cy - y_step,      0.0f
+                };
+
+                h_v = {
+                    v[0], v[1], v[2],
+                    prev_v[6], prev_v[7], prev_v[8],
+                    prev_v[9], prev_v[10], prev_v[11],
+
+                    v[6],v[7],v[8],
+                    v[9],v[10],v[11],
+                    v[12], v[13], v[14]
+                };
+                h_i = {
+                    0, 1, 2,
+                    0, 2, 5,
+                    0, 3, 4,
+                    0, 4, 5
+                };
+                
+                get_colors(h_v, x_max, y_max, px_x_step, px_y_step, colors);
+                Hexagon h(x, y * 2, colors);
+                hexagons.push_back(h);
+                create_hex_triangle(h_i, h_v, colors, triangleFactory);
+            }
+            
             cell++;
         }
     }
-
+    triangleFactory.finalizeBuffer();
+    std::string final = "";
     for (size_t i = 0; i < hexagons.size(); i++)
     {
-        int* h_indices = hexagons[i].getIndices();
-        float* h_vertices = hexagons[i].getVertices();
-        float t[9];
-        for (size_t j = 0; j < 4; j++)
-        {
-            for (size_t k = 0; k < 3; k++)
-            {
-                int vi = hexagons[i].getIndices()[j * 3 + k];
-                t[k * 3 + 0] = hexagons[i].getVertices()[vi * 3 + 0];
-                t[k * 3 + 1] = hexagons[i].getVertices()[vi * 3 + 1];
-                t[k * 3 + 2] = hexagons[i].getVertices()[vi * 3 + 2];
-            }
-
-            float r = 0.0075f * (i + 1);
-            float g = 0.1f;
-            float b = 0.03f;
-            float colors[] = {
-                r, g, b,
-                r, g, b,
-                r, g, b
-            };
-
-            Triangle t1(t, colors);
-            triangleFactory.addTriangle(t1);
-
-        }
-    } 
+        double r = hexagons[i].getColors()[0];
+        double g = hexagons[i].getColors()[1];
+        double b = hexagons[i].getColors()[2];
+        final += "{" + std::to_string(hexagons[i].getX()) + "," + std::to_string(hexagons[i].getY()) +
+            ",(" + std::to_string(r) + "," + std::to_string(g) + "," + std::to_string(b) + ")};";
+    }
+    std::ofstream hex_file("hexcells.hex");
+    hex_file << final;
+    hex_file.close();
 }
-
-/*
-min 84 hex vertices
-min 120 hex indices
-*/
-void generate_new_grid_vertices(float xmax, float xmin, float ymax, float ymin, int size, float *hex_vertices, int *indices) {
-    float o_xmax = xmax * 2;
-    float o_ymax = ymax * 2;
-    float o_xmin = 0.0;
-    float o_ymin = 0.0;
-
-    //float hex_vertices[84];
-    int h_size = 5 * size;
-    int d_size_x1 = 5 * size;
-    int d_size_x2 = 6 * size;
-    int d_size_y1 = 4 * size;
-
-    int indexer = 0;
-
-    for (size_t i = 0; i < h_size; i++)
-    {
-
-        if (i % 2 == 0) {
-            for (size_t j = 0; j < d_size_x2; j++)
-            {
-                //std::cout << "I:" << i << "| X: " << (j * (o_xmax / d_size_x1)) - xmax << " Y : " <<((4-i)*(o_ymax/4)) - ymax << std::endl;
-                hex_vertices[indexer++] = (j * (o_xmax / d_size_x1)) - xmax;
-                hex_vertices[indexer++] = ((4 - i) * (o_ymax / 4)) - ymax;
-                hex_vertices[indexer++] = 0.0f;
-            }
-        }
-        else {
-            for (size_t j = 0; j < d_size_x1; j++)
-            {
-                //std::cout << "I:" << i << "| X: " << ((j + 1) * (o_xmax / d_size_x2)) - xmax << " Y: " << ((4-i) * (o_ymax / 4)) - ymax << std::endl;
-
-                hex_vertices[indexer++] = ((j+1) * (o_xmax / d_size_x2)) - xmax;
-                hex_vertices[indexer++] = ((4 - i) * (o_ymax / 4)) - ymax;
-                hex_vertices[indexer++] = 0.0f;
-            }
-        }
-    }
-
-    int h_hex_h_count = 3 * size;
-    int v_hex_h_count = 4 * size;
-    int startx[9] = { 0, 1, 6, 
-                      1, 6, 7,
-                      1, 2, 7};
-    int starty[9] = { 2, 7, 8,
-                      2, 3, 8,
-                      3, 8, 9};
-
-    int startz1[3] = { 0, d_size_x1 + 1, d_size_x1 + d_size_x2 };
-    int startz2[3] = { d_size_x1, d_size_x1  + d_size_x1, d_size_x1 + d_size_x2 + d_size_x1};
-
-    //int indices[120];
-    int indices_indexer = 0;
-    int xindexer = 0;
-    int yindexer = 2;
-    for (size_t i = 0; i < v_hex_h_count; i++)
-    {
-        for (size_t j = 0; j < h_hex_h_count; j++)
-        {
-            if ((i + j) % 2 == 0) {
-                for (size_t k = 0; k < 9; k++)
-                {
-                    indices[indices_indexer] = startx[k];
-                    indices_indexer++;
-                    if (xindexer == 0) {
-                        startx[k] += 3;
-                    }
-                    else {
-                        startx[k] += 4;
-                    }
-                }
-                xindexer++;
-                if (xindexer >= 3) {
-                    xindexer = 0;
-                }
-            }
-            else {
-                for (size_t k = 0; k < 9; k++)
-                {
-                    indices[indices_indexer] = starty[k];
-                    indices_indexer++;
-                    if (yindexer == 0) {
-                        starty[k] += 3;
-                    }
-                    else {
-                        starty[k] += 4;
-                    }
-                }
-                yindexer++;
-                if (yindexer >= 3) {
-                    yindexer = 0;
-                }
-            }
-        }
-    }
-    for (size_t i = 0; i < v_hex_h_count; i++)
-    {
-        if (i % 2 == 0) {
-            for (size_t k = 0; k < 3; k++)
-            {
-                indices[indices_indexer] = startz1[k];
-                startz1[k] += d_size_x1 + d_size_x2;
-                indices_indexer++;
-            }
-        }
-        else {
-            for (size_t k = 0; k < 3; k++)
-            {
-                indices[indices_indexer] = startz2[k];
-                startz2[k] += d_size_x1 + d_size_x2;
-                indices_indexer++;
-            }
-        }
-    }
-}
-
 void create_new_grid(TriangleFactory& triangleFactory) {
     float corner_vertices[12];
     get_new_vertex_positions(corner_vertices);
-    const int size = 10;
+    const int size = 20;
     const int arr_size = size * (size * 2 * 24);
-    float hex_vertices[arr_size];
-    int indices[arr_size];
+    std::vector<float> hex_vertices(arr_size);
+    std::vector<int> indices(arr_size);
     std::vector<Hexagon> hexagons;
     new_grid_kernel(corner_vertices[0], corner_vertices[1], size, hex_vertices, indices, hexagons, triangleFactory);
     return;
-    int i = 0;
-    int indices_idx = 0;
-    while (i < arr_size/3)
+}
+
+void create_hex_cell(std::vector<Hexagon>& hexagons, TriangleFactory& triangleFactory) {
+    float size = 0.0125f;
+
+    float x_step = 0.75f;
+    float y_step = 1.0f;
+    float y_half_step = 0.5;
+    
+    float offset = 0.5;
+
+    std::array<int, 12> indices = {
+        0, 1, 2,
+        1, 2, 3,
+        2, 3, 4,
+        3, 4, 5
+    };
+
+    for (size_t i = 0; i < hexagons.size(); i++)
     {
-        float t[9];
-        int idx = 0;
-        for (size_t j = 0; j < 3; j++)
-        {
-            for (size_t k = 0; k < 3; k++)
-            {
-                t[idx++] = hex_vertices[(indices[indices_idx] * 3) + k];
-            }
-            std::cout << indices[indices_idx]*3 << std::endl;
+        int x = hexagons[i].getX();
+        int y = hexagons[i].getY();
 
-            indices_idx++;
-            /*std::cout << i * j << std::endl;
-            for (size_t k = 0; k < 3; k++)
-            {
-                t[idx] = hex_vertices[curr_idx + idx];
-                std::cout << curr_idx + idx;
-                idx++;
-            }
-            //std::cout << std::endl;*/
+        float center_x = x * (2.0f * x_step);
+        if (y % 2 != 0) {
+            center_x += x_step;
         }
-        std::cout << "---" << std::endl;
-
-        float r = 0.03f*(i+1);
-        float g = 0.1f;
-        float b = 0.03f;
-        float colors[] = {
-            r, g, b,
-            r, g, b,
-            r, g, b
+        
+        float center_y = y * (-1.5f * y_step);
+        
+        std::array<float, 18> base_vertices = {
+            (center_x)*size, (center_y)*size, 0.0f,
+            (center_x - x_step) * size, (center_y - y_half_step) * size, 0.0f,
+            (center_x + x_step) * size, (center_y - y_half_step) * size, 0.0f,
+            (center_x - x_step) * size, (center_y - 1.5f * y_step) * size, 0.0f,
+            (center_x + x_step) * size, (center_y - 1.5f * y_step) * size, 0.0f,
+            (center_x)*size, (center_y - 2.0f * y_step) * size, 0.0f
         };
-        Triangle t1(t, colors);
-        triangleFactory.addTriangle(t1);
-        i++;
+        create_hex_triangle(indices, base_vertices, hexagons[i].getColors(), triangleFactory);
     }
-    std::cout << "---------" << std::endl;
-    
+    triangleFactory.finalizeBuffer();
+}
 
-    return;
-    float grid_vertices[30] = {
-    corner_vertices[0], corner_vertices[1], 0.0f, //top right
-    corner_vertices[0], corner_vertices[1] / 3, 0.0f,
-    corner_vertices[3], corner_vertices[4], 0.0f, // bottom right
-    corner_vertices[3]/3, corner_vertices[4], 0.0f,
-    corner_vertices[6], corner_vertices[7], 0.0f, // bottom left
-    corner_vertices[9], corner_vertices[7]/3, 0.0f,
-    corner_vertices[9], corner_vertices[10], 0.0f, // top left 
-    
-    corner_vertices[9]/3, corner_vertices[1], 0.0f,
+void load_hex_file(TriangleFactory& triangleFactory) {
+    std::string filename = getFilePath();
+    if (filename == "") {
+        return;
+    }
+    std::string file_content;
+    std::string final_file_content;
+    std::ifstream hex_file(filename);
+    while (std::getline(hex_file, file_content)) {
+        final_file_content += file_content;
+    }
+    hex_file.close();
+    std::string x, y, r, g, b;
+    int state = 0;
+    std::vector<Hexagon> hexagons;
+    for (size_t i = 0; i < final_file_content.size(); i++)
+    {
+        switch (state)
+        {
+        case 0:
+            if (final_file_content[i] == '{'){
+                state = 1;
+            }
+            break;
+        case 1:
+            if (final_file_content[i] == ',') {
+                state = 2;
+            }
+            else {
+                x += final_file_content[i];
+            }
+            break;
+        case 2:
+            if (final_file_content[i] == ',') {
+                state = 3;
+            }
+            else {
+                y += final_file_content[i];
+            }
+            break;
+        case 3:
+            if (final_file_content[i] == '(') {
+                state = 4;
+            }
+            break;
+        case 4:
+            if (final_file_content[i] == ',') {
+                state = 5;
+            }
+            else {
+                r += final_file_content[i];
+            }
+            break;
+        case 5:
+            if (final_file_content[i] == ',') {
+                state = 6;
+            }
+            else {
+                g += final_file_content[i];
+            }
+            break;
+        case 6:
+            if (final_file_content[i] == ')') {
+                state = 7;
+            }
+            else {
+                b += final_file_content[i];
+            }
+            break;
+        case 7:
+            state = 0;
+            float colors[9] = {
+                std::stof(r),std::stof(g), std::stof(b),
+                std::stof(r),std::stof(g), std::stof(b),
+                std::stof(r),std::stof(g), std::stof(b)
+            };
+            int xin = std::stoi(x);
+            int yin = std::stoi(y);
+            Hexagon h(xin, yin, colors);
+            hexagons.push_back(h);
+            x.clear();
+            y.clear();
+            r.clear();
+            g.clear();
+            b.clear();
+            break;
+        }
+    }
 
-    corner_vertices[9] / 3, corner_vertices[7] / 3, 0.0f,
-    corner_vertices[3] / 3, corner_vertices[1] / 3, 0.0f,
-    };
-    /*float r = 0.23f;
-    float g = 0.23f;
-    float b = 0.23f;
-    float colors[] = {
-        r, g, b,
-        r, g, b,
-        r, g, b
-    };
-
-    float hex1_0[9] = {
-        grid_vertices[21], grid_vertices[22], grid_vertices[23],
-        grid_vertices[27], grid_vertices[28], grid_vertices[29],
-        grid_vertices[18], grid_vertices[19], grid_vertices[20],
-    };
-
-    float hex1_1[9] = {
-        grid_vertices[18], grid_vertices[19], grid_vertices[20],
-        grid_vertices[15], grid_vertices[16], grid_vertices[17],
-        grid_vertices[24], grid_vertices[25], grid_vertices[26],
-    };
-    Triangle t1(hex1_0, colors);
-    Triangle t2(hex1_1, colors);
-    triangleFactory.addTriangle(t1);
-    triangleFactory.addTriangle(t2);*/
+    create_hex_cell(hexagons, triangleFactory);
 }

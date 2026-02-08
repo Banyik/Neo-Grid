@@ -53,6 +53,8 @@ public:
 
     void addTriangle(const Triangle& tri) {
         triangles.push_back(tri);
+    }
+    void finalizeBuffer() {
         rebuildVertexBuffer();
     }
 

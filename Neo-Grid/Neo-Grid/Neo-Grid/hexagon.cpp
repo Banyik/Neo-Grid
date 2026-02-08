@@ -22,6 +22,16 @@ Hexagon::Hexagon(float h_vertices[], int h_indices[]) {
 	}
 }
 
+Hexagon::Hexagon(int h_x, int h_y, float* h_colors) {
+	instanceID = globalID++;
+	x = h_x;
+	y = h_y;
+	for (size_t i = 0; i < 9; i++)
+	{
+		vertexColors[i] = h_colors[i];
+	}
+}
+
 int Hexagon::getID() {
 	return instanceID;
 }
@@ -37,4 +47,14 @@ int* Hexagon::getIndices() {
 float* Hexagon::getColors()
 {
 	return vertexColors;
+}
+
+int Hexagon::getX()
+{
+	return x;
+}
+
+int Hexagon::getY()
+{
+	return y;
 }

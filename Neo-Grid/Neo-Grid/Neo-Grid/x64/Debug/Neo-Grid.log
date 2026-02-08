@@ -4,11 +4,21 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\shared\minwindef.h(1
       C:\Users\User\Documents\glfw-3.4.bin.WIN64\glfw-3.4.bin.WIN64\include\glad\glad.h(32,9):
       see previous definition of 'APIENTRY'
   
-C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\triangle_factory.cpp(63,57): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\triangle_factory.cpp(65,57): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
   (compiling source file 'main.cpp')
   
-C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(193,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(193,17): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(269,36): warning C4267: 'argument': conversion from 'size_t' to 'glm::vec<4,float,glm::packed_highp>::length_type', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(210,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(210,17): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(289,36): warning C4267: 'argument': conversion from 'size_t' to 'glm::vec<4,float,glm::packed_highp>::length_type', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(311,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(340,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(341,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(342,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(343,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(344,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(345,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(346,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(347,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp(348,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Neo-Grid.vcxproj -> C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\x64\Debug\Neo-Grid.exe
