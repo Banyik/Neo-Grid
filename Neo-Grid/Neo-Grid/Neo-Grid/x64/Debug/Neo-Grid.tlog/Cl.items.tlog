@@ -1,2 +1,12 @@
 C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\glad.c;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\glad.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\hexagon.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\hexagon.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\imgui.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\imgui.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\imgui_draw.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\imgui_draw.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\imgui_impl_glfw.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\imgui_impl_glfw.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\imgui_impl_opengl3.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\imgui_impl_opengl3.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\imgui_tables.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\imgui_tables.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\imgui_widgets.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\imgui_widgets.obj
 C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\main.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\main.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\tnonagon.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\tnonagon.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\triangle.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\triangle.obj
+C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\triangle_factory.cpp;C:\Users\User\Documents\Kutatás\Neo-Grid\Neo-Grid\Neo-Grid\x64\Debug\triangle_factory.obj

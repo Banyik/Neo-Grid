@@ -1,0 +1,264 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui_widgets.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\imgui_widgets.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui_impl_opengl3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\imgui_impl_opengl3.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\imgui.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\tnonagon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\tnonagon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\hexagon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\hexagon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\tnonagon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\tnonagon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\shader.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\shader.fs||{8A5AA6CF-46E3-4520-A70A-7393D15233E9}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\hexagon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\hexagon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\shader.vs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\shader.vs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle_factory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\triangle_factory.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\triangle.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle_factory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\triangle_factory.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D91D4853-B2D7-4656-B067-4C59A6A92941}|Neo-Grid\\Neo-Grid.vcxproj|solutionrelative:Neo-Grid\\triangle.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 14,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "imgui_widgets.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui_widgets.cpp",
+              "RelativeDocumentMoniker": "Neo-Grid\\imgui_widgets.cpp",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui_widgets.cpp",
+              "RelativeToolTip": "Neo-Grid\\imgui_widgets.cpp",
+              "ViewState": "AgIAALIRAAAAAAAAAAAWwEQTAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-16T11:47:25.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "imgui_impl_opengl3.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui_impl_opengl3.cpp",
+              "RelativeDocumentMoniker": "Neo-Grid\\imgui_impl_opengl3.cpp",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui_impl_opengl3.cpp",
+              "RelativeToolTip": "Neo-Grid\\imgui_impl_opengl3.cpp",
+              "ViewState": "AgIAALABAAAAAAAAAAAawLoBAABnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-16T10:38:47.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "imgui.h",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui.h",
+              "RelativeDocumentMoniker": "Neo-Grid\\imgui.h",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\imgui.h",
+              "RelativeToolTip": "Neo-Grid\\imgui.h",
+              "ViewState": "AgIAADcAAAAAAAAAAAAWwEMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-16T10:30:53.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "tnonagon.h",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\tnonagon.h",
+              "RelativeDocumentMoniker": "Neo-Grid\\tnonagon.h",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\tnonagon.h",
+              "RelativeToolTip": "Neo-Grid\\tnonagon.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-09T12:05:28.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "tnonagon.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\tnonagon.cpp",
+              "RelativeDocumentMoniker": "Neo-Grid\\tnonagon.cpp",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\tnonagon.cpp",
+              "RelativeToolTip": "Neo-Grid\\tnonagon.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2026-02-09T12:05:03.155Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "hexagon.h",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\hexagon.h",
+              "RelativeDocumentMoniker": "Neo-Grid\\hexagon.h",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\hexagon.h",
+              "RelativeToolTip": "Neo-Grid\\hexagon.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-02-05T10:40:01.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "vector",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\include\\vector",
+              "ViewState": "AgIAAH8HAAAAAAAAAAAawIkHAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-02-04T11:50:30.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "hexagon.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\hexagon.cpp",
+              "RelativeDocumentMoniker": "Neo-Grid\\hexagon.cpp",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\hexagon.cpp",
+              "RelativeToolTip": "Neo-Grid\\hexagon.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-12-21T16:32:50.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "shader.fs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\shader.fs",
+              "RelativeDocumentMoniker": "Neo-Grid\\shader.fs",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\shader.fs",
+              "RelativeToolTip": "Neo-Grid\\shader.fs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-18T14:24:31.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "triangle_factory.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle_factory.cpp",
+              "RelativeDocumentMoniker": "Neo-Grid\\triangle_factory.cpp",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle_factory.cpp",
+              "RelativeToolTip": "Neo-Grid\\triangle_factory.cpp",
+              "ViewState": "AgIAACsAAAAAAAAAAAAawDUAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-20T14:41:50.796Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "triangle_factory.h",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle_factory.h",
+              "RelativeDocumentMoniker": "Neo-Grid\\triangle_factory.h",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle_factory.h",
+              "RelativeToolTip": "Neo-Grid\\triangle_factory.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-20T14:41:39.072Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "triangle.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle.cpp",
+              "RelativeDocumentMoniker": "Neo-Grid\\triangle.cpp",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle.cpp",
+              "RelativeToolTip": "Neo-Grid\\triangle.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-20T14:33:46.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "triangle.h",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle.h",
+              "RelativeDocumentMoniker": "Neo-Grid\\triangle.h",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\triangle.h",
+              "RelativeToolTip": "Neo-Grid\\triangle.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-20T14:30:59.951Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "shader.vs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\shader.vs",
+              "RelativeDocumentMoniker": "Neo-Grid\\shader.vs",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\shader.vs",
+              "RelativeToolTip": "Neo-Grid\\shader.vs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-10T14:30:12.77Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\main.cpp",
+              "RelativeDocumentMoniker": "Neo-Grid\\main.cpp",
+              "ToolTip": "C:\\Users\\User\\Documents\\Kutat\u00E1s\\Neo-Grid\\Neo-Grid\\Neo-Grid\\main.cpp",
+              "RelativeToolTip": "Neo-Grid\\main.cpp",
+              "ViewState": "AgIAADUBAAAAAAAAAAAmwEQBAAB0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-09T11:27:33.687Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

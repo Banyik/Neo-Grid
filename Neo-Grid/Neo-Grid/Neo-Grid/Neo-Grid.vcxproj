@@ -136,15 +136,40 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
+    <ClCompile Include="hexagon.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui_tables.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="tnonagon.cpp" />
+    <ClCompile Include="triangle.cpp" />
+    <ClCompile Include="triangle_factory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\x64\Debug\ekcu-logo.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="hexagon.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_glfw.h" />
+    <ClInclude Include="imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="shader_s.h" />
+    <ClInclude Include="tnonagon.h" />
+    <ClInclude Include="triangle.h" />
+    <ClInclude Include="triangle_factory.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="basic_shader.fs" />
+    <None Include="basic_shader.vs" />
     <None Include="shader.fs" />
     <None Include="shader.vs" />
   </ItemGroup>
